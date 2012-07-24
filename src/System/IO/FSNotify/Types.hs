@@ -9,7 +9,7 @@ module System.IO.FSNotify.Types
        , EventChannel
        , ActionPredicate
        , Action
-       , act
+       , alwaysAct
        ) where
 
 import Prelude hiding (FilePath)
@@ -39,5 +39,5 @@ type ActionPredicate = Event -> Bool
 type Action = Event -> IO ()
 
 -- | Predicate to always act.
-act :: ActionPredicate
-act _ = True
+alwaysAct :: ActionPredicate
+alwaysAct = const True

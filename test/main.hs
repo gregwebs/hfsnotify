@@ -1,6 +1,5 @@
 module Main where
-
--- TODO: cabal'ize existing tests with HUnit and hook them up in here.
+import qualified Basic
 
 main :: IO ()
-main = return ()
+main = Basic.spec
