@@ -35,17 +35,26 @@ Library
   if os(linux)
     CPP-Options:        -DOS_Linux
     Other-Modules:      System.IO.FSNotify.Linux
-    Build-Depends:      filemanip >= 0.3.5.2, hinotify == 0.3.2
+    Build-Depends:      hinotify == 0.3.2
   else
     if os(windows)
       CPP-Options:      -DOS_Win32
       Other-Modules:    System.IO.FSNotify.Win32
       Build-Depends:    Win32-notify == 0.2
     else
+      -- kqueue
+      build-depends:    unix
       if os(darwin)
         CPP-Options:    -DOS_Mac
         Other-Modules:  System.IO.FSNotify.OSX
+                        -- fallback
+                        System.IO.FSNotify.Kqueue
         Build-Depends:  hfsevents >= 0.1.2
+      else
+        -- hoping to catch BSD here & use kqueue
+        -- if os(freebsd|netbsd|openbsd|dragonfly)
+        CPP-Options:    -DOS_UNKNOWN
+        Other-Modules:  System.IO.FSNotify.Kqueue
 
 
 Test-Suite test
