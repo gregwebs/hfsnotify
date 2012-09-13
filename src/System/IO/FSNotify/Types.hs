@@ -19,11 +19,12 @@ module System.IO.FSNotify.Types
 
 import Prelude hiding (FilePath)
 
-import Control.Concurrent.Chan
+import Control.Concurrent.Chan.Strict
 import Data.IORef (IORef)
 import Data.Time (NominalDiffTime)
 import Data.Time.Clock (UTCTime)
 import Filesystem.Path.CurrentOS
+import Control.DeepSeq
 
 -- | A file event reported by a file watcher. Each event contains the
 -- canonical path for the file and a timestamp guaranteed to be after the
@@ -34,6 +35,9 @@ data Event =
   | Modified FilePath UTCTime
   | Removed  FilePath UTCTime
   deriving (Eq, Show)
+
+instance NFData Event where
+   rnf a = a `seq` ()
 
 -- | Helper for extracting the path associated with an event.
 eventPath :: Event -> FilePath

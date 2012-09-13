@@ -11,7 +11,8 @@ module System.IO.FSNotify.Polling
 
 import Prelude hiding (FilePath)
 
-import Control.Concurrent
+import Control.Concurrent hiding (writeChan)
+import Control.Concurrent.Chan.Strict
 import Data.Map (Map)
 import Data.Maybe
 import Data.Time.Clock (UTCTime, getCurrentTime)

@@ -21,7 +21,8 @@ module System.IO.FSNotify
 
 import Prelude hiding (FilePath, catch)
 
-import Control.Concurrent
+import Control.Concurrent hiding (Chan, newChan, readChan)
+import Control.Concurrent.Chan.Strict
 import Control.Exception
 import Data.Map (Map)
 import Filesystem.Path.CurrentOS

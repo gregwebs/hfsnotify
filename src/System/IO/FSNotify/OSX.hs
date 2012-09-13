@@ -10,7 +10,7 @@ module System.IO.FSNotify.OSX
 
 import Prelude hiding (FilePath, catch)
 
-import Control.Concurrent.Chan
+import Control.Concurrent.Chan.Strict
 import Control.Concurrent.MVar
 import Control.Monad hiding (void)
 import Data.Bits
