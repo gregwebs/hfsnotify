@@ -1,3 +1,4 @@
+{-# Language TypeFamilies #-}
 --
 -- Copyright (c) 2012 Mark Dittmer - http://www.markdittmer.org
 -- Developed for a Google Summer of Code project - http://gsoc2012.markdittmer.org
@@ -115,6 +116,8 @@ handleEvents actPred chan dbp (event:events) = do
 handleEvents _ _ _ [] = void
 
 instance FileListener OSXManager where
+  type WatchId OSXManager = FSE.EventStream
+
   initSession = do
     (v1, v2, _) <- FSE.osVersion
     if not $ v1 > 10 || (v1 == 10 && v2 > 6) then return Nothing else
